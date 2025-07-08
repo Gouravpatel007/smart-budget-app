@@ -1,0 +1,85 @@
+"use strict";
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.useBudget = exports.BudgetProvider = void 0;
+var _react = _interopRequireWildcard(require("react"));
+var _localStorage = require("../utils/localStorage");
+var _defaults = require("../utils/defaults");
+var _AuthContext = require("./AuthContext");
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, "default": e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var BudgetContext = /*#__PURE__*/(0, _react.createContext)(undefined);
+var BudgetProvider = exports.BudgetProvider = function BudgetProvider(_ref) {
+  var children = _ref.children;
+  var _useAuth = (0, _AuthContext.useAuth)(),
+    user = _useAuth.user,
+    isAuthenticated = _useAuth.isAuthenticated;
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    transactions = _useState2[0],
+    setTransactions = _useState2[1];
+  var _useState3 = (0, _react.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    budgets = _useState4[0],
+    setBudgets = _useState4[1];
+  var _useState5 = (0, _react.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    categories = _useState6[0],
+    setCategories = _useState6[1];
+  var _useState7 = (0, _react.useState)({
+      dateRange: (0, _defaults.getDefaultDateRange)('monthly'),
+      categories: [],
+      type: 'all'
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    filterOptions = _useState8[0],
+    setFilterOptions = _useState8[1];
+
+  // Fetch user data when authenticated
+  (0, _react.useEffect)(function () {
+    if (isAuthenticated && user) {
+      refreshData();
+    } else {
+      // Clear data when not authenticated
+      setTransactions([]);
+      setBudgets([]);
+      setCategories([]);
+    }
+  }, [isAuthenticated, user]);
+
+  // Refresh all data
+  var refreshData = function refreshData() {
+    if (!user) return;
+    var userId = user.id;
+    setTransactions((0, _localStorage.getTransactions)(userId));
+    setBudgets((0, _localStorage.getBudgets)(userId));
+    setCategories((0, _localStorage.getCategories)().filter(function (cat) {
+      return cat.userId === userId;
+    }));
+  };
+  return /*#__PURE__*/_react["default"].createElement(BudgetContext.Provider, {
+    value: {
+      transactions: transactions,
+      budgets: budgets,
+      categories: categories,
+      filterOptions: filterOptions,
+      setFilterOptions: setFilterOptions,
+      refreshData: refreshData
+    }
+  }, children);
+};
+var useBudget = exports.useBudget = function useBudget() {
+  var context = (0, _react.useContext)(BudgetContext);
+  if (!context) {
+    throw new Error('useBudget must be used within a BudgetProvider');
+  }
+  return context;
+};
