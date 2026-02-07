@@ -2,7 +2,7 @@
 
 # 💰 Smart Budget App
 
-*Smart Budget App* is a modern web application that helps users track their income, expenses, and get personalized financial advice using AI. Built with *Next.js* and *OpenAI's GPT-4*, the app provides smart insights to help you better manage your finances.
+*Smart Budget App* is a modern web application that helps users track their income, expenses. The app provides smart insights to help you better manage your finances.
 
 ---
 
@@ -11,7 +11,6 @@
 - 🔐 Secure user authentication
 - 📊 Add and view income/expense transactions
 - 📈 Track total budget, income, and expenses
-- 🧠 Get AI-powered financial advice using GPT-4
 - 🌗 Clean and modern UI with responsive design
 
 ---
@@ -20,8 +19,7 @@
 
 - *Frontend*: React
 - *Backend*: Node.js + API routes
-- *AI Integration*: OpenAI API (GPT-4)
-- *Database*: (MongoDB / Your choice)
+- *Database*: MongoDB
 - *Styling*: TailwindCSS / CSS Modules
 
 ---
