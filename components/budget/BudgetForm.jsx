@@ -12,161 +12,37 @@ var _Button = require("../ui/Button");
 var _Select = require("../ui/Select");
 var _lucideReact = require("lucide-react");
 var _formatters = require("../../utils/formatters");
-function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, "default": e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+
+function _interopRequireWildcard(e, t) { 
+             if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); 
+                    return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { 
+                            if (!t && e && e.__esModule) return e; 
+                              var o, i, f = { __proto__: null, "default": e }; 
+                      
+                      if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; 
+                      if (o = t ? n : r) { 
+                                  if (o.has(e)) return o.get(e); o.set(e, f); 
+                      } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); 
+}
+function _slicedToArray(r, e) { 
+            return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); 
+}
+function _nonIterableRest() { 
+            throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); 
+}
+function _unsupportedIterableToArray(r, a) { 
+            if (r) { if ("string" == typeof r) 
+              return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); 
+                return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } 
+}
+function _arrayLikeToArray(r, a) { 
+  (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; 
+}
+function _iterableToArrayLimit(r, l) { 
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; }
+}
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; } // import React, { useEffect, useState } from 'react';
-// import { Card } from '../ui/Card';
-// import { Input } from '../ui/Input';
-// import { Button } from '../ui/Button';
-// import { Select } from '../ui/Select';
-// import { Budget, Category } from '../../types';
-// import { DollarSign, Calendar, Archive, Plus } from 'lucide-react';
-// import { formatMonth } from '../../utils/formatters';
-// interface BudgetFormProps {
-//   onSubmit: (budget: Omit<Budget, 'id'>) => void;
-//   categories: Category[];
-//   editingBudget: Budget | null;
-//   userId: string;
-//   month: number;
-//   year: number;
-//   existingBudgets: Budget[];
-// }
-// export const BudgetForm: React.FC<BudgetFormProps> = ({
-//   onSubmit,
-//   categories,
-//   editingBudget,
-//   userId,
-//   month,
-//   year,
-//   existingBudgets,
-// }) => {
-//   const [amount, setAmount] = useState('');
-//   const [categoryId, setCategoryId] = useState('');
-//   const [errors, setErrors] = useState<Record<string, string>>({});
-//   // Filter categories to exclude Income
-//   const eligibleCategories = categories.filter(cat => cat.name !== 'Income');
-//   // Filter out categories that already have budgets for this month
-//   const availableCategories = eligibleCategories.filter(cat => {
-//     if (editingBudget && editingBudget.categoryId === cat.id) {
-//       return true; // Include the category of the budget being edited
-//     }
-//     return !existingBudgets.some(
-//       budget => 
-//         budget.categoryId === cat.id && 
-//         budget.month === month &&
-//         budget.year === year
-//     );
-//   });
-//   // Fill form with budget data when editing
-//   useEffect(() => {
-//     if (editingBudget) {
-//       setAmount(editingBudget.amount.toString());
-//       setCategoryId(editingBudget.categoryId);
-//     } else {
-//       // Reset form on component mount or when editingBudget becomes null
-//       setAmount('');
-//       setCategoryId(availableCategories.length > 0 ? availableCategories[0].id : '');
-//     }
-//   }, [editingBudget, availableCategories]);
-//   const validateForm = (): boolean => {
-//     const newErrors: Record<string, string> = {};
-//     if (!amount) {
-//       newErrors.amount = 'Amount is required';
-//     } else if (isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
-//       newErrors.amount = 'Amount must be a positive number';
-//     }
-//     if (!categoryId) {
-//       newErrors.categoryId = 'Category is required';
-//     }
-//     setErrors(newErrors);
-//     return Object.keys(newErrors).length === 0;
-//   };
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     if (!validateForm()) {
-//       return;
-//     }
-//     onSubmit({
-//       amount: parseFloat(amount),
-//       month,
-//       year,
-//       categoryId,
-//       userId,
-//     });
-//     // Reset form if not editing
-//     if (!editingBudget) {
-//       setAmount('');
-//       if (availableCategories.length > 0) {
-//         setCategoryId(availableCategories[0].id);
-//       }
-//     }
-//   };
-//   return (
-//     <Card title={editingBudget ? 'Edit Budget' : 'Add Budget'}>
-//       <form onSubmit={handleSubmit} className="space-y-4">
-//         <Input
-//           type="text"
-//           label="Month"
-//           value={formatMonth(month, year)}
-//           disabled
-//           leftIcon={<Calendar className="h-5 w-5 text-gray-400" />}
-//         />
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//           <div>
-//             <Select
-//               label="Category"
-//               value={categoryId}
-//               onChange={(e) => setCategoryId(e.target.value)}
-//               options={
-//                 editingBudget
-//                   ? eligibleCategories
-//                       .filter(cat => cat.id === editingBudget.categoryId)
-//                       .map(cat => ({ value: cat.id, label: cat.name }))
-//                   : availableCategories.map(cat => ({ value: cat.id, label: cat.name }))
-//               }
-//               error={errors.categoryId}
-//               disabled={editingBudget !== null || availableCategories.length === 0}
-//               required
-//             />
-//             {availableCategories.length === 0 && !editingBudget && (
-//               <p className="text-xs text-amber-600 dark:text-amber-500 mt-1">
-//                 All categories already have budgets for this month
-//               </p>
-//             )}
-//           </div>
-//           <div>
-//             <Input
-//               type="number"
-//               label="Budget Amount"
-//               placeholder="0.00"
-//               value={amount}
-//               onChange={(e) => setAmount(e.target.value)}
-//               step="0.01"
-//               min="0"
-//               leftIcon={<DollarSign className="h-5 w-5 text-gray-400" />}
-//               error={errors.amount}
-//               disabled={availableCategories.length === 0 && !editingBudget}
-//               required
-//             />
-//           </div>
-//         </div>
-//         <div className="flex justify-end space-x-2">
-//           <Button
-//             type="submit"
-//             leftIcon={editingBudget ? <Archive /> : <Plus />}
-//             disabled={availableCategories.length === 0 && !editingBudget}
-//           >
-//             {editingBudget ? 'Update Budget' : 'Add Budget'}
-//           </Button>
-//         </div>
-//       </form>
-//     </Card>
-//   );
-// };
+
 var BudgetForm = exports.BudgetForm = function BudgetForm(_ref) {
   var onSubmit = _ref.onSubmit,
     categories = _ref.categories,
